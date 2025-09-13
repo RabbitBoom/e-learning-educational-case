@@ -1,14 +1,18 @@
+/*
+ * @FilePath: \e-learning-educational-case\src\app\layout.tsx
+ * @Author: chinamobao@gmail.com
+ * @Date: 2025-09-12 23:37:18
+ * @LastEditors: chinamobao@gmail.com
+ * @LastEditTime: 2025-09-13 16:43:33
+ */
+import "@/styles/tailwindcss.css";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "../styles/tailwindcss.css";
+import { Be_Vietnam_Pro } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const beVietnamPro = Be_Vietnam_Pro({
+  weight: ["400", "500", "600", "700"],
+  fallback: ["Arial", "Helvetica", "sans-serif"],
+  variable: "--font-be_vietnam_pro",
   subsets: ["latin"],
 });
 
@@ -23,12 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="en" className={beVietnamPro.variable}>
+      <body className="body">{children}</body>
     </html>
   );
 }
