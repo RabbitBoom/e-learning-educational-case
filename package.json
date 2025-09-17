@@ -7,8 +7,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "test": "jest",
-    "test:coverge": "jest --coverage",
+    "test": "jest --coverage --verbose",
     "test:watch": "jest --watch"
   },
   "dependencies": {

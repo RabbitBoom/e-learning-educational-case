@@ -2,13 +2,13 @@
  * @FilePath: \e-learning-educational-case\src\stores\index.ts
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-12 23:37:18
- * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-16 10:31:12
+ * @LastEditors: chinamobao@gmali.com
+ * @LastEditTime: 2025-09-17 17:46:14
  */
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import localStorage from "redux-persist/lib/storage";
-import { systemSlice } from "./system";
+import system from "./system";
 
 const persistConfig = {
   key: "root",
@@ -17,7 +17,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  system: systemSlice.reducer,
+  system,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

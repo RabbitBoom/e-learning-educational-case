@@ -1,3 +1,10 @@
+/*
+ * @FilePath: \e-learning-educational-case\src\stores\system.ts
+ * @Author: chinamobao@gmali.com
+ * @Date: 2025-09-17 16:31:11
+ * @LastEditors: chinamobao@gmali.com
+ * @LastEditTime: 2025-09-17 17:44:31
+ */
 import { createSlice } from "@reduxjs/toolkit";
 
 type SystemState = {
@@ -7,7 +14,8 @@ type SystemState = {
 const initialState: SystemState = {
   theme: "light",
 };
-export const systemSlice = createSlice({
+
+const systemSlice = createSlice({
   name: "system",
   initialState,
   reducers: {
@@ -16,3 +24,7 @@ export const systemSlice = createSlice({
     },
   },
 });
+
+export const { setTheme } = systemSlice.actions;
+
+export default systemSlice.reducer;
