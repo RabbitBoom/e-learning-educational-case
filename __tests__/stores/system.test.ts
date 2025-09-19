@@ -5,7 +5,7 @@
  * @LastEditors: chinamobao@gmali.com
  * @LastEditTime: 2025-09-17 17:47:41
  */
-import reducer, { setTheme } from "@/stores/system";
+import reducer, { setTheme } from "@/stores/System";
 
 describe("system reducer", () => {
   it("should handle initial state", () => {

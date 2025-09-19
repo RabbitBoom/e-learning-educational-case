@@ -2,8 +2,8 @@
  * @FilePath: \e-learning-educational-case\__tests__\hooks\storesHooks.test.tsx
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-13 18:19:00
- * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-13 18:27:56
+ * @LastEditors: chinamobao@gmali.com
+ * @LastEditTime: 2025-09-17 19:23:11
  */
 import { useAppDispatch, useAppSelector } from "@/hooks/storesHooks";
 import { renderHook } from "@testing-library/react";
