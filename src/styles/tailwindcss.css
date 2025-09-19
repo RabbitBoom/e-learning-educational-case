@@ -45,6 +45,7 @@ body {
 }
 
 :is(header) {
+  @apply pb-0;
   .topic {
     @apply text-center text-sm bg-orange-50 text-white rounded-md px-4 py-3;
   }
@@ -110,7 +111,10 @@ body {
         &.social-links {
           @apply flex gap-3.5;
           > a {
-            @apply inline-flex rounded-md p-3 bg-white-97 dark:text-grey-30;
+            @apply inline-flex rounded-md p-2.5 bg-white-97 dark:text-grey-30;
+            .icon-svg {
+              @apply size-4.5;
+            }
           }
         }
         a:hover {
