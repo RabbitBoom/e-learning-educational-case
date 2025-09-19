@@ -28,11 +28,95 @@
   --color-grey-60: hsl(0, 0%, 60%);
   --color-grey-70: hsl(0, 0%, 70%);
   --breakpoint-*: initial;
-  --breakpoint-mobile: 390px;
-  --breakpoint-laptop: 1440px;
-  --breakpoint-desktop: 1920px;
+  --breakpoint-mobile: 475px;
+  --breakpoint-laptop: 950px;
+  --breakpoint-desktop: 1440px;
 }
 
 body {
-  @apply bg-white-97 text-grey-30 transform-gpu antialiased dark:bg-grey-10 dark:text-white;
+  @apply min-h-dvh flex flex-col bg-white-97 text-grey-30 transform-gpu antialiased dark:bg-grey-10 dark:text-white;
+}
+
+:is(header, section, footer) {
+  @apply p-4 bg-inherit laptop:p-5 desktop:px-8;
+  .content {
+    @apply laptop:px-15;
+  }
+}
+
+:is(header) {
+  .topic {
+    @apply text-center text-sm bg-orange-50 text-white rounded-md px-4 py-3;
+  }
+
+  .content {
+    @apply flex items-center py-4 pb-5 border-b-1 border-white-95;
+    .right {
+      @apply flex justify-end ml-auto gap-4;
+    }
+  }
+}
+
+:is(main) {
+  @apply flex-1;
+}
+
+:is(footer) {
+  @apply pt-12.5 pb-6 bg-white dark:bg-grey-10;
+  .content {
+    @apply flex flex-wrap justify-between border-b-1 border-white-95 pb-5 gap-5;
+    .right {
+      @apply flex gap-5 flex-wrap;
+    }
+  }
+  .copyright {
+    @apply pt-5 text-center text-grey-40;
+  }
+}
+
+@layer components {
+  .icon-svg {
+    @apply inline-flex size-6 aspect-square text-inherit align-middle;
+  }
+
+  .logo {
+    @apply relative z-1 inline-flex overflow-hidden;
+
+    h1 {
+      @apply absolute z-0;
+    }
+
+    span {
+      @apply relative z-1 text-white p-1 rounded-md bg-orange-50 size-10 overflow-hidden;
+    }
+  }
+
+  .note-list {
+    &:not(:last-child) {
+      @apply mr-10;
+    }
+    .note-list-head {
+      @apply mb-3;
+      h2 {
+        @apply text-lg font-semibold;
+      }
+    }
+
+    > ul {
+      @apply flex flex-col gap-3;
+
+      > li {
+        @apply flex gap-2;
+        &.social-links {
+          @apply flex gap-3.5;
+          > a {
+            @apply inline-flex rounded-md p-3 bg-white-97 dark:text-grey-30;
+          }
+        }
+        a:hover {
+          @apply underline text-orange-50;
+        }
+      }
+    }
+  }
 }
