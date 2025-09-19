@@ -8,7 +8,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import localStorage from "redux-persist/lib/storage";
-import system from "./system";
+import system from "./System";
 
 const persistConfig = {
   key: "root",

@@ -3,12 +3,12 @@
  * @Author: chinamobao@gmali.com
  * @Date: 2025-09-17 16:31:11
  * @LastEditors: chinamobao@gmali.com
- * @LastEditTime: 2025-09-17 17:44:31
+ * @LastEditTime: 2025-09-18 23:06:38
  */
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type SystemState = {
-  theme: "light" | "dark" | "system";
+  theme: "light" | "dark";
 };
 
 const initialState: SystemState = {
@@ -19,7 +19,7 @@ const systemSlice = createSlice({
   name: "system",
   initialState,
   reducers: {
-    setTheme: (state, action) => {
+    setTheme: (state, action: PayloadAction<"light" | "dark">) => {
       state.theme = action.payload;
     },
   },

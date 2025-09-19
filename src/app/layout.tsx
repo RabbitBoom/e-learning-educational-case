@@ -2,15 +2,17 @@
  * @FilePath: \e-learning-educational-case\src\app\layout.tsx
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-12 23:37:18
- * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-16 10:50:11
+ * @LastEditors: chinamobao@gmali.com
+ * @LastEditTime: 2025-09-19 17:54:55
  */
-import { persistor, store } from "@/stores";
+
+import StoreProvider from "@/stores/StoreProvider";
 import "@/styles/tailwindcss.css";
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 const beVietnamPro = Be_Vietnam_Pro({
   weight: ["400", "500", "600", "700"],
@@ -32,11 +34,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={beVietnamPro.variable}>
       <body className="body">
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            {children}
-          </PersistGate>
-        </Provider>
+        <StoreProvider>
+            <Header />
+            <main>
+              {children}
+            </main>
+            <Footer />
+        </StoreProvider>
       </body>
     </html>
   );
