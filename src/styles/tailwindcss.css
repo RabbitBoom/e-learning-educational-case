@@ -75,6 +75,13 @@ body {
   }
 }
 
+:is(a[href]) {
+  @apply transition-all ease-in-out duration-300;
+  &:hover {
+    @apply underline text-orange-50;
+  }
+}
+
 @layer components {
   .icon-svg {
     @apply inline-flex size-6 aspect-square text-inherit align-middle;
@@ -116,9 +123,6 @@ body {
               @apply size-4.5;
             }
           }
-        }
-        a:hover {
-          @apply underline text-orange-50;
         }
       }
     }
