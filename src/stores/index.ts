@@ -2,8 +2,8 @@
  * @FilePath: \e-learning-educational-case\src\stores\index.ts
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-12 23:37:18
- * @LastEditors: chinamobao@gmali.com
- * @LastEditTime: 2025-09-17 17:46:14
+ * @LastEditors: chinamobao@gmail.com
+ * @LastEditTime: 2025-09-20 16:50:33
  */
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
@@ -16,7 +16,7 @@ const persistConfig = {
   whitelist: ["system"], // only system will be persisted
 };
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   system,
 });
 

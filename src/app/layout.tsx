@@ -2,8 +2,8 @@
  * @FilePath: \e-learning-educational-case\src\app\layout.tsx
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-12 23:37:18
- * @LastEditors: chinamobao@gmali.com
- * @LastEditTime: 2025-09-19 17:54:55
+ * @LastEditors: chinamobao@gmail.com
+ * @LastEditTime: 2025-09-20 16:57:21
  */
 
 import StoreProvider from "@/stores/StoreProvider";
@@ -23,7 +23,8 @@ const beVietnamPro = Be_Vietnam_Pro({
 
 export const metadata: Metadata = {
   title: "E-Learning Educational",
-  description: "A showcase of front-end development skills using Next.js, Redux/Toolkit, Framer Motion, TypeScript, Shadcn/UI, and Tailwind CSS.",
+  description:
+    "A showcase of front-end development skills using Next.js, Redux/Toolkit, Framer Motion, TypeScript, Shadcn/UI, and Tailwind CSS.",
 };
 
 export default function RootLayout({
@@ -35,11 +36,9 @@ export default function RootLayout({
     <html lang="en" className={beVietnamPro.variable}>
       <body className="body">
         <StoreProvider>
-            <Header />
-            <main>
-              {children}
-            </main>
-            <Footer />
+          <Header />
+            <main>{children}</main>
+          <Footer />
         </StoreProvider>
       </body>
     </html>

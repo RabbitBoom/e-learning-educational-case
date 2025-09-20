@@ -2,8 +2,8 @@
  * @FilePath: \e-learning-educational-case\src\components\Logo.tsx
  * @Author: chinamobao@gmali.com
  * @Date: 2025-09-19 18:09:49
- * @LastEditors: chinamobao@gmali.com
- * @LastEditTime: 2025-09-19 19:44:15
+ * @LastEditors: chinamobao@gmail.com
+ * @LastEditTime: 2025-09-20 00:01:38
  */
 import Link from "next/link";
 import Icon from "./Icon";
@@ -15,8 +15,8 @@ export default function Logo({ className = "" }: { className?: string }) {
       className={`logo ${className}`}
       title="Link to Home"
     >
-      <h1>Skillbridge</h1>
-      <Icon icon="logo" aria-label="Skillbridge Logo" />
+      <h1>E-Learning Platform</h1>
+      <Icon icon="logo" aria-label="E-Learning Platform Logo" />
     </Link>
   );
 }
