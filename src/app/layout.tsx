@@ -2,11 +2,10 @@
  * @FilePath: \e-learning-educational-case\src\app\layout.tsx
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-12 23:37:18
- * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-20 16:57:21
+ * @LastEditors: chinamobao@gmali.com
+ * @LastEditTime: 2025-09-24 08:47:11
  */
 
-import StoreProvider from "@/stores/StoreProvider";
 import "@/styles/tailwindcss.css";
 import type { Metadata } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
@@ -35,11 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={beVietnamPro.variable}>
       <body className="body">
-        <StoreProvider>
           <Header />
             <main>{children}</main>
           <Footer />
-        </StoreProvider>
       </body>
     </html>
   );

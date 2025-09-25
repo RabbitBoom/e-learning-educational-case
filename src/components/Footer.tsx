@@ -12,15 +12,15 @@ export default function Footer() {
           </div>
           <ul>
             <li>
-              <Icon icon="email" />
+              <Icon icon="Email" />
               <span>hello@skillbridge.com</span>
             </li>
             <li>
-              <Icon icon="phone" />
+              <Icon icon="Phone" />
               <span>+91 91813 23 2309</span>
             </li>
             <li>
-              <Icon icon="location" />
+              <Icon icon="Location" />
               <span>Somewhere in the World</span>
             </li>
           </ul>
@@ -88,7 +88,7 @@ export default function Footer() {
                   aria-label="Facebook"
                   title="Facebook"
                 >
-                  <Icon icon="facebook" />
+                  <Icon icon="Facebook" />
                 </a>
                 <a
                   href="https://www.x.com"
@@ -97,7 +97,7 @@ export default function Footer() {
                   aria-label="Twitter"
                   title="Twitter"
                 >
-                  <Icon icon="twitter" />
+                  <Icon icon="Twitter" />
                 </a>
                 <a
                   href="https://www.linkedin.com"
@@ -106,7 +106,7 @@ export default function Footer() {
                   aria-label="LinkedIn"
                   title="LinkedIn"
                 >
-                  <Icon icon="linkedin" />
+                  <Icon icon="Linkedin" />
                 </a>
               </li>
             </ul>

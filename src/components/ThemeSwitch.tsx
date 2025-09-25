@@ -2,39 +2,43 @@
  * @FilePath: \e-learning-educational-case\src\components\ThemeSwitch.tsx
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-18 15:51:21
- * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-20 00:29:12
+ * @LastEditors: chinamobao@gmali.com
+ * @LastEditTime: 2025-09-24 20:26:32
  */
 "use client";
-import { useAppDispatch, useAppSelector } from "@/hooks/storesHooks";
-import { AppDispatch } from "@/stores";
-import { setTheme } from "@/stores/System";
+import { useLocalStorage } from "@reactuses/core";
 import { useEffect } from "react";
 import Icon from "./Icon";
 
 export default function ThemeSwitch() {
-  const theme = useAppSelector((state) => state.system.theme);
-  const dispatch = useAppDispatch();
+  const [theme, setTheme] = useLocalStorage<"light" | "dark">(
+    "System.theme",
+    "light"
+  );
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme ?? "light");
   }, [theme]);
   const toggleTheme = () => {
-    dispatch(setTheme(theme === "light" ? "dark" : "light"));
+    setTheme(theme === "light" ? "dark" : "light");
   };
   return (
-    <button aria-label="toggle color scheme" onClick={toggleTheme}>
+    <button
+      className="theme-switch"
+      aria-label="toggle color scheme"
+      onClick={toggleTheme}
+    >
       {theme === "light" ? (
-        <Icon icon="sun" className="size-8 text-orange-50" />
+        <Icon icon="Sun" className="size-8 text-orange-50" />
       ) : (
-        <Icon icon="moon" className="size-8 text-orange-50" />
+        <Icon icon="Moon" className="size-8 text-orange-50" />
       )}
     </button>
   );
 }
 
-export const _test_toggleTheme = (
+/* export const _test_toggleTheme = (
   dispatch: AppDispatch,
   theme: "light" | "dark"
 ) => {
   dispatch(setTheme(theme === "light" ? "dark" : "light"));
-};
+}; */
