@@ -2,13 +2,14 @@
  * @FilePath: \e-learning-educational-case\next.config.ts
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-12 23:37:18
- * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-18 17:43:45
+ * @LastEditors: chinamobao@gmali.com
+ * @LastEditTime: 2025-09-25 08:17:13
  */
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  reactStrictMode: process.env.NODE_ENV === 'production' ? true : false,
   devIndicators: false,
   turbopack: {
     rules: {
