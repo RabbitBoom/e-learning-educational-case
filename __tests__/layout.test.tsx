@@ -3,44 +3,39 @@
  * @Author: chinamobao@gmali.com
  * @Date: 2025-09-12 18:46:43
  * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-20 17:00:22
+ * @LastEditTime: 2025-09-25 17:52:07
  */
 
-import Layout from "@/app/layout";
+import { BodyLayout } from "@/app/layout";
 import { render, screen } from "@testing-library/react";
-import { ReactNode } from "react";
 
 // Mock Next.js font
 jest.mock("next/font/google", () => ({
   Be_Vietnam_Pro: () => ({ variable: "mock-font-variable" }),
 }));
 
-// Mock components
-jest.mock("@/stores/StoreProvider", () => {
-  const MockStoreProvider = ({ children }: { children: ReactNode }) => (
-    <>{children}</>
-  );
-  MockStoreProvider.displayName = "MockStoreProvider";
-  return MockStoreProvider;
-});
+// mock Header/Footer 避免实际渲染
 jest.mock("@/components/Header", () => {
-  const MockHeader = () => <header>Header</header>;
-  MockHeader.displayName = "MockHeader";
-  return MockHeader;
+  const mockHeader = () => <header>Header</header>;
+  mockHeader.displayName = "mockHeader";
+  return mockHeader;
 });
 jest.mock("@/components/Footer", () => {
-  const MockFooter = () => <footer>Footer</footer>;
-  MockFooter.displayName = "MockFooter";
-  return MockFooter;
+  const mockFooter = () => <footer>Footer</footer>;
+  mockFooter.displayName = "mockFooter";
+  return mockFooter;
 });
 
-describe("RootLayout", () => {
-  it("renders a layout", () => {
+describe("BodyLayout", () => {
+  it("renders children inside main", () => {
     render(
-      <Layout>
+      <BodyLayout>
         <div>Test Child</div>
-      </Layout>
+      </BodyLayout>
     );
+
+    expect(screen.getByText("Header")).toBeInTheDocument();
     expect(screen.getByText("Test Child")).toBeInTheDocument();
+    expect(screen.getByText("Footer")).toBeInTheDocument();
   });
 });

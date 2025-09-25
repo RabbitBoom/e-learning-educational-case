@@ -3,26 +3,35 @@
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-20 00:00:15
  * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-20 16:22:34
+ * @LastEditTime: 2025-09-25 18:11:16
  */
 import Header from "@/components/Header";
 
-import { store } from "@/stores/index";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { ReactNode } from "react";
-import { Provider } from "react-redux";
 
-jest.mock("@/components/ThemeSwitch", () => {
-  const MockThemeSwitch = () => <div>MockThemeSwitch</div>;
-  MockThemeSwitch.displayName = "MockThemeSwitch";
-  return MockThemeSwitch;
-});
+// Mock ThemeSwitch Component
+jest.mock("@/components/ThemeSwitch", () => ({
+  __esModule: true,
+  default: () => <button data-testid="mock-theme-switch">ThemeSwitch</button>,
+}));
 
+// Mock next Link 组件
 jest.mock("next/link", () => {
-  return ({ children }: { children: ReactNode }) => children;
+  const mockLink = ({
+    href,
+    children,
+    ...props
+  }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  );
+  mockLink.displayName = "mockLink";
+  return mockLink;
 });
 
+// Mock Icon Component
 jest.mock("@/components/Icon", () => {
   const MockIcon = ({ icon }: { icon: string }) => (
     <span data-testid={`icon-${icon}`} />
@@ -30,22 +39,56 @@ jest.mock("@/components/Icon", () => {
   MockIcon.displayName = "MockIcon";
   return MockIcon;
 });
-jest.mock("@/components/Logo", () => {
-  const MockLogo = () => <div data-testid="logo" />;
-  MockLogo.displayName = "MockLogo";
-  return MockLogo;
+
+// Mock Logo Component
+jest.mock("@/components/Logo", () => ({
+  __esModule: true,
+  default: () => <div data-testid="mock-logo">Logo</div>,
+}));
+
+// Mock NavMenu component
+jest.mock("@/components/NavMenu", () => {
+  const NavMenu: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
+    <nav>{children}</nav>
+  );
+  const NavMenuTrigger: React.FC = () => <button>Trigger</button>;
+  const NavMenuWrap: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
+    <div>{children}</div>
+  );
+  const NavMenuLink: React.FC<
+    React.PropsWithChildren<{
+      href: string;
+      className?: string;
+      target?: string;
+      "aria-label"?: string;
+      title?: string;
+    }>
+  > = ({ children, ...props }) => <a {...props}>{children}</a>;
+
+  return { NavMenu, NavMenuTrigger, NavMenuWrap, NavMenuLink };
 });
 
-describe("Header Component", () => {
-  it("renders the header with correct text", () => {
-    render(
-      <Provider store={store}>
-        <Header />
-      </Provider>
-    );
-    const headerElement = screen.getByText(
-      /Free Courses 🌟 Sale Ends Soon, Get It Now/i
-    );
-    expect(headerElement).toBeInTheDocument();
+describe("Header", () => {
+  it("renders header content", () => {
+    render(<Header />);
+
+    const heading = screen.getByRole("heading", {
+      name: /free courses 🌟 sale ends soon, get it now/i,
+    });
+    expect(heading).toBeInTheDocument();
+
+    // Logo
+    expect(screen.getByTestId("mock-logo")).toBeInTheDocument();
+
+    // ThemeSwitch
+    expect(screen.getByTestId("mock-theme-switch")).toBeInTheDocument();
+
+    // NavMenu links
+    const navNames = ["Home", "Courses", "About Us", "Pricing", "Contact"];
+    navNames.forEach((name) => {
+      const link = screen.getByRole("link", { name: `${name} Link` });
+      expect(link).toBeInTheDocument();
+      expect(link).toHaveAttribute("href");
+    });
   });
 });

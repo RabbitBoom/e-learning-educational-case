@@ -3,7 +3,7 @@
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-20 17:03:11
  * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-20 17:05:57
+ * @LastEditTime: 2025-09-25 18:06:17
  */
 import Icon from "@/components/Icon";
 import { render, screen } from "@testing-library/react";
@@ -14,16 +14,33 @@ jest.mock("next/dynamic", () => () => {
   return Component;
 });
 
-describe("Icon component", () => {
-  it("renders with given icon prop", () => {
-    render(<Icon icon="test-icon" className="my-class" />);
+// Mock IconsMap fetch icons data
+jest.mock("@/components/iconsMap", () => ({
+  Sun: () => <svg data-testid="svg-Sun" />,
+  Moon: () => <svg data-testid="svg-Moon" />,
+  Logo: () => <svg data-testid="svg-Logo" />,
+}));
 
-    const wrapper = screen.getByText(
-      (content, element) => !!element && element.classList.contains("icon-svg")
-    );
-    expect(wrapper).toBeInTheDocument();
-    expect(wrapper).toHaveClass("my-class");
+describe("Icon", () => {
+  it("renders the correct SVG when icon exists", () => {
+    render(<Icon icon="Sun" />);
 
-    expect(screen.getByTestId("mock-svg")).toBeInTheDocument();
+    const svg = screen.getByTestId("svg-Sun");
+    expect(svg).toBeInTheDocument();
+  });
+
+  it("renders null when icon does not exist", () => {
+    type NonExistentIcon = "NonExistent" & string;
+    render(<Icon icon={"NonExistent" as NonExistentIcon} />);
+    const svg = screen.queryByTestId("svg-NonExistent");
+    expect(svg).not.toBeInTheDocument();
+  });
+
+  it("applies className and other span props", () => {
+    render(<Icon icon="Moon" className="custom-class" title="moon icon" />);
+
+    const span = screen.getByTitle("moon icon");
+    expect(span).toHaveClass("icon-svg custom-class");
   });
 });
+

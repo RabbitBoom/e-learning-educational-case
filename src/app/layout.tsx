@@ -12,6 +12,7 @@ import { Be_Vietnam_Pro } from "next/font/google";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { ReactNode } from "react";
 
 const beVietnamPro = Be_Vietnam_Pro({
   weight: ["400", "500", "600", "700"],
@@ -26,6 +27,16 @@ export const metadata: Metadata = {
     "A showcase of front-end development skills using Next.js, Redux/Toolkit, Framer Motion, TypeScript, Shadcn/UI, and Tailwind CSS.",
 };
 
+export function BodyLayout({ children }: { children: ReactNode }) {
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,9 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={beVietnamPro.variable}>
       <body className="body">
-          <Header />
-            <main>{children}</main>
-          <Footer />
+        <BodyLayout>{children}</BodyLayout>
       </body>
     </html>
   );

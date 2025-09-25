@@ -2,8 +2,8 @@
  * @FilePath: \e-learning-educational-case\src\components\ThemeSwitch.tsx
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-18 15:51:21
- * @LastEditors: chinamobao@gmali.com
- * @LastEditTime: 2025-09-24 20:26:32
+ * @LastEditors: chinamobao@gmail.com
+ * @LastEditTime: 2025-09-25 17:55:14
  */
 "use client";
 import { useLocalStorage } from "@reactuses/core";
@@ -35,10 +35,3 @@ export default function ThemeSwitch() {
     </button>
   );
 }
-
-/* export const _test_toggleTheme = (
-  dispatch: AppDispatch,
-  theme: "light" | "dark"
-) => {
-  dispatch(setTheme(theme === "light" ? "dark" : "light"));
-}; */
