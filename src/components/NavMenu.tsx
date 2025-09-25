@@ -2,8 +2,8 @@
  * @FilePath: \e-learning-educational-case\src\components\NavMenu.tsx
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-20 18:23:47
- * @LastEditors: chinamobao@gmali.com
- * @LastEditTime: 2025-09-24 23:26:14
+ * @LastEditors: chinamobao@gmail.com
+ * @LastEditTime: 2025-09-25 13:16:18
  */
 "use client";
 import {
@@ -12,6 +12,7 @@ import {
   useWindowSize,
 } from "@reactuses/core";
 import clsx from "clsx";
+import { motion } from "motion/react";
 import Link, { LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useContext, useEffect, useRef, useState } from "react";
@@ -29,14 +30,18 @@ export function NavMenu({ children }: { children?: ReactNode | ReactNode[] }) {
 }
 
 export function NavMenuTrigger() {
-  const { show, setShow } = useContext(NAvMenuContext);
+  const menuContext = useContext(NAvMenuContext);
   return (
     <button
       className="hover:text-orange-50 laptop:hidden"
-      aria-label={show ? "close menu" : "open menu"}
-      onClick={() => setShow(!show)}
+      aria-label={menuContext?.show ? "close menu" : "open menu"}
+      onClick={() =>
+        menuContext?.show
+          ? menuContext?.closeMethod?.()
+          : menuContext?.openMethod?.()
+      }
     >
-      <Icon className="size-10" icon={show ? "Close" : "Menu"} />
+      <Icon className="size-10" icon={menuContext?.show ? "Close" : "Menu"} />
     </button>
   );
 }
@@ -45,8 +50,8 @@ export function NavMenuWrap({ children }: { children?: ReactNode }) {
   const pathName = usePathname();
   const { width: winW } = useWindowSize();
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuContext = useContext(NAvMenuContext);
   const [wrapStyle, setWrapStyle] = useState({ paddingTop: 0 });
-  const { matches, show, setShow, maskStyle } = useContext(NAvMenuContext);
 
   useEffect(() => {
     const headerEl = document.querySelector("header");
@@ -57,31 +62,39 @@ export function NavMenuWrap({ children }: { children?: ReactNode }) {
   }, [winW]);
 
   useEffect(() => {
-    setShow(false);
+    menuContext.closeMethod?.();
   }, [pathName]);
 
   useClickAway(menuRef, () => {
-    setShow(false);
+    menuContext.closeMethod?.();
   });
   const navComp = (
-    <div
+    <motion.div
+      initial="closed"
+      animate={menuContext?.menuControls}
       className="nav-content"
       aria-label="menus"
-      aria-orientation={matches ? "horizontal" : "vertical"}
-      aria-hidden={matches ? false : !show}
+      aria-orientation={menuContext?.matches ? "horizontal" : "vertical"}
+      aria-hidden={menuContext?.matches ? false : !menuContext?.show}
     >
-      <div ref={menuRef} className="nav-wrap" style={!matches ? wrapStyle : {}}>
+      <motion.div
+        initial="closed"
+        animate={menuContext?.navWrapControls}
+        ref={menuRef}
+        className="nav-wrap"
+        style={!menuContext?.matches ? wrapStyle : {}}
+      >
         <nav>{children}</nav>
         <div className="sign-btns"></div>
         <span
           className="nav-link-mask"
-          style={matches ? maskStyle : {}}
+          style={menuContext?.matches ? menuContext?.maskStyle : {}}
           tabIndex={-1}
         ></span>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
-  if (matches || typeof document === "undefined") return navComp;
+  if (menuContext?.matches || typeof document === "undefined") return navComp;
   return createPortal(navComp, document.body);
 }
 
@@ -98,20 +111,21 @@ export function NavMenuLink({
   ...props
 }: NavMenuLinkProps) {
   const pathName = usePathname();
+  const menuContext = useContext(NAvMenuContext);
   const linkRef = useRef<HTMLAnchorElement>(null);
-  const { matches, setMaskStyle } = useContext(NAvMenuContext);
   const { width, height } = useElementBounding(linkRef);
   useEffect(() => {
-    if (!matches || pathName !== props?.href || !linkRef.current) return;
+    if (!menuContext?.matches || pathName !== props?.href || !linkRef.current)
+      return;
     const { offsetTop: top, offsetLeft: left } = linkRef.current;
-    setMaskStyle((prev) => ({
+    menuContext?.setMaskStyle?.((prev) => ({
       ...prev,
       width,
       height,
       top,
       left,
     }));
-  }, [matches, pathName, props.href, height, width, setMaskStyle]);
+  }, [menuContext?.matches, pathName, props.href, height, width]);
   return (
     <Link
       ref={linkRef}
