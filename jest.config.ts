@@ -3,12 +3,12 @@
  * https://jestjs.io/docs/configuration
  */
 
-import type { Config } from 'jest';
-import nextJest from 'next/jest.js';
+import type { Config } from "jest";
+import nextJest from "next/jest.js";
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: './',
+  dir: "./",
 });
 
 const config: Config = {
@@ -34,10 +34,7 @@ const config: Config = {
   coverageDirectory: "coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: [
-    "\\\\node_modules\\\\",
-    "iconsMap.ts",
-  ],
+  coveragePathIgnorePatterns: ["\\\\node_modules\\\\", "iconsMap.ts"],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
@@ -107,7 +104,9 @@ const config: Config = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^motion/react$": "<rootDir>/__mocks__/motion/react.tsx",
+    "^@reactuses/core$": "<rootDir>/__mocks__/@reactuses/core.ts",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -155,7 +154,7 @@ const config: Config = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,

@@ -2,13 +2,14 @@
  * @FilePath: \e-learning-educational-case\__tests__\components\Header.test.tsx
  * @Author: chinamobao@gmail.com
  * @Date: 2025-09-20 00:00:15
- * @LastEditors: chinamobao@gmail.com
- * @LastEditTime: 2025-09-25 18:11:16
+ * @LastEditors: chinamobao@gmali.com
+ * @LastEditTime: 2025-09-27 22:58:41
  */
 import Header from "@/components/Header";
 
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+import { ReactNode } from "react";
 
 // Mock ThemeSwitch Component
 jest.mock("@/components/ThemeSwitch", () => ({
@@ -48,13 +49,13 @@ jest.mock("@/components/Logo", () => ({
 
 // Mock NavMenu component
 jest.mock("@/components/NavMenu", () => {
-  const NavMenu: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
-    <nav>{children}</nav>
-  );
+  const NavMenu: React.FC<React.PropsWithChildren<{ children: ReactNode }>> = ({
+    children,
+  }) => <nav>{children}</nav>;
   const NavMenuTrigger: React.FC = () => <button>Trigger</button>;
-  const NavMenuWrap: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
-    <div>{children}</div>
-  );
+  const NavMenuWrap: React.FC<
+    React.PropsWithChildren<{ children: ReactNode }>
+  > = ({ children }) => <div>{children}</div>;
   const NavMenuLink: React.FC<
     React.PropsWithChildren<{
       href: string;

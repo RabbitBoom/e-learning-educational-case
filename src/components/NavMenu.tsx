@@ -75,6 +75,7 @@ export function NavMenuWrap({ children }: { children?: ReactNode }) {
       className="nav-content"
       aria-label="menus"
       aria-orientation={menuContext?.matches ? "horizontal" : "vertical"}
+      aria-expanded={menuContext?.matches ? true : menuContext?.show}
       aria-hidden={menuContext?.matches ? false : !menuContext?.show}
     >
       <motion.div
@@ -118,13 +119,12 @@ export function NavMenuLink({
     if (!menuContext?.matches || pathName !== props?.href || !linkRef.current)
       return;
     const { offsetTop: top, offsetLeft: left } = linkRef.current;
-    menuContext?.setMaskStyle?.((prev) => ({
-      ...prev,
+    menuContext?.setMaskStyle?.({
       width,
       height,
       top,
       left,
-    }));
+    });
   }, [menuContext?.matches, pathName, props.href, height, width]);
   return (
     <Link
