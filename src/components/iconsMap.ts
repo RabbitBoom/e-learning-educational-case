@@ -26,3 +26,4 @@ export { default as Shield } from "@/assets/svg/shield.svg";
 export { default as Sun } from "@/assets/svg/sun.svg";
 export { default as Twitter } from "@/assets/svg/twitter.svg";
 export { default as Warning_light } from "@/assets/svg/warning_light.svg";
+
